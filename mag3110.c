@@ -159,19 +159,19 @@ uint8_t mag3110Read(mag3110Data *data)
 
 double getDirection(double x, double y)
 {
-    if (y > 0)
-        return 90 - atan(x / y) * 180 / M_PI;
-    if (y < 0)
-        return 270 - atan(x / y) * 180 / M_PI;
-    if (x > 0)
-        return 180.0;
-    return 0.0;
+    //if (y > 0)
+        //return 90 - atan(x / y) * 180 / M_PI;
+    //if (y < 0)
+        //return 270 - atan(x / y) * 180 / M_PI;
+    //if (x > 0)
+        //return 180.0;
+    //return 0.0;
 
-    // float heading = atan2(-y,x);
-    // if(heading < 0)
-    //     heading += 2 * M_PI;
+     float heading = atan2(-y,x);
+     if(heading < 0)
+         heading += 2 * M_PI;
 
-    // return heading * (180/M_PI);
+     return heading * (180/M_PI);
 }
 
 void mag3110CleanUp()
