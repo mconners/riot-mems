@@ -72,44 +72,44 @@ int init3110(int i2cNum)
     return 0;
 }
 
-// int16_t MAG3110_ReadRawData_x()
-// {
-//     return MAG3110_ReadRawData(X_OUT_MSB, X_OUT_LSB, X_DATA_RDY);
-// }
+int16_t MAG3110_ReadRawData_x()
+{
+    return MAG3110_ReadRawData(X_OUT_MSB, X_OUT_LSB, X_DATA_RDY);
+}
 
-// int16_t MAG3110_ReadRawData_y()
-// {
-//     return MAG3110_ReadRawData(Y_OUT_MSB, Y_OUT_LSB, Y_DATA_RDY);
-// }
+int16_t MAG3110_ReadRawData_y()
+{
+    return MAG3110_ReadRawData(Y_OUT_MSB, Y_OUT_LSB, Y_DATA_RDY);
+}
 
-// int16_t MAG3110_ReadRawData_z()
-// {
-//     return MAG3110_ReadRawData(Z_OUT_MSB, Z_OUT_LSB, Z_DATA_RDY);
-// }
+int16_t MAG3110_ReadRawData_z()
+{
+    return MAG3110_ReadRawData(Z_OUT_MSB, Z_OUT_LSB, Z_DATA_RDY);
+}
 
-// int16_t MAG3110_ReadRawData(unsigned char msbReg, unsigned char lsbReg, unsigned char statusFlag)
-// {
-//     unsigned char data = 0;
-//     int16_t val = 0;
+int16_t MAG3110_ReadRawData(unsigned char msbReg, unsigned char lsbReg, unsigned char statusFlag)
+{
+    unsigned char data = 0;
+    int16_t val = 0;
 
-//     read_register(MAG3110_I2C_ID, msbReg, &data);
-//     write_register(MAG3110_I2C_ID, CTRL_REG_2, 0x80);
-//     write_register(MAG3110_I2C_ID, CTRL_REG_1, 0x02);
+    read_register(MAG3110_I2C_ID, msbReg, &data);
+    write_register(MAG3110_I2C_ID, CTRL_REG_2, 0x80);
+    write_register(MAG3110_I2C_ID, CTRL_REG_1, 0x02);
 
-//     do
-//     {
-//         read_register(MAG3110_I2C_ID, STATUS_REG, &data);
-//     }
-//     while ((data & statusFlag) != statusFlag);
+    do
+    {
+        read_register(MAG3110_I2C_ID, STATUS_REG, &data);
+    }
+    while ((data & statusFlag) != statusFlag);
 
-//     read_register(MAG3110_I2C_ID, msbReg, &data);
-//     val = data;
-//     val <<= 8;
-//     read_register(MAG3110_I2C_ID, lsbReg, &data);
-//     val += data;
+    read_register(MAG3110_I2C_ID, msbReg, &data);
+    val = data;
+    val <<= 8;
+    read_register(MAG3110_I2C_ID, lsbReg, &data);
+    val += data;
 
-//     return val;
-// }
+    return val;
+}
 
 uint8_t mag3110ReadRaw(uint8_t *data)
 {
@@ -135,6 +135,13 @@ uint8_t mag3110ReadRaw(uint8_t *data)
     }
 
     return 1;
+}
+
+uint8_t MAG3110Read(mag3110Data *data)
+{
+    data-x = MAG3110_ReadRawData_x();
+    data-y = MAG3110_ReadRawData_y();
+    data-z = MAG3110_ReadRawData_z();
 }
 
 uint8_t mag3110Read(mag3110Data *data)
