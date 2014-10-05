@@ -49,7 +49,7 @@
 #define ALL_DATA_RDY    (0x07)
 
 static int i2cDev = -1;
-
+int16_t MAG3110_ReadRawData(unsigned char msbReg, unsigned char lsbReg, unsigned char statusFlag);
 
 int init3110(int i2cNum)
 {
