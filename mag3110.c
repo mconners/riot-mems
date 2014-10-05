@@ -142,7 +142,7 @@ uint8_t mag3110Read(mag3110Data *data)
     uint8_t rawData[8] = {0};
     if (mag3110ReadRaw(rawData))
     {
-        data->x = rawData[0] << 8;
+        data->x = rawData[0];
         data->x <<= 8;
         data->x += rawData[1];
 
