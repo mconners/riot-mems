@@ -66,6 +66,13 @@ int main()
         printf("3110 Y Val Read = %d\n", magData.y);
         printf("3110 Z Val Read = %d\n", magData.z);
         printf("Direction is %g\n", getDirection((double)magData.x, (double)magData.y));
+        
+        MAG3110Read(&magData);
+        printf("3110 - X Val Read = %d\n", magData.x);
+        printf("3110 - Y Val Read = %d\n", magData.y);
+        printf("3110 - Z Val Read = %d\n", magData.z);
+        printf("Direction is %g\n", getDirection((double)magData.x, (double)magData.y));
+        
         mma8491Read(&mmaData);
         printf("8491 X Val Read = %d\n", mmaData.x);
         printf("8491 Y Val Read = %d\n", mmaData.y);

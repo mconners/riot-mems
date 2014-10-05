@@ -33,6 +33,7 @@ typedef struct {
 
 int init3110(int i2cNum);
 uint8_t mag3110Read(mag3110Data *data);
+uint8_t MAG3110Read(mag3110Data *data);
 double getDirection(double x, double y);
 void mag3110CleanUp();
 #endif /* _MAG3110_H */
