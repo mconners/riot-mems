@@ -139,9 +139,10 @@ uint8_t mag3110ReadRaw(uint8_t *data)
 
 uint8_t MAG3110Read(mag3110Data *data)
 {
-    data-x = MAG3110_ReadRawData_x();
-    data-y = MAG3110_ReadRawData_y();
-    data-z = MAG3110_ReadRawData_z();
+    data->x = MAG3110_ReadRawData_x();
+    data->y = MAG3110_ReadRawData_y();
+    data->z = MAG3110_ReadRawData_z();
+    return 1;
 }
 
 uint8_t mag3110Read(mag3110Data *data)
