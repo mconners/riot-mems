@@ -25,15 +25,10 @@ static volatile int cont = 1;
 
 int main()
 {
-    // unsigned char data;
-    // int temperatureData;
-    // int temperatureFinal;
-    // int DBG_ENABLE = 0;
     mma8491Data mmaData;
     mag3110Data magData;
 
     signal(SIGINT,sigHandler);
-
 
     if (!init3110(2) || !init8491(2, 135))
     {
@@ -45,8 +40,6 @@ int main()
 
     while (cont)
     {
-        // int16_t x = MAG3110_ReadRawData_x();
-        // int16_t y = MAG3110_ReadRawData_y();
         mag3110Read(&magData);
         printf("3110 X Val Read = %d\n", magData.x);
         printf("3110 Y Val Read = %d\n", magData.y);
