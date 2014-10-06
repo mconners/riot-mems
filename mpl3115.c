@@ -20,7 +20,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-#include <i2c.h>
+#include "i2c.h"
 
 int init3115(int i2cNum)
 {
