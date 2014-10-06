@@ -1,0 +1,1 @@
+int init3115(int i2cNum);
