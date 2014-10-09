@@ -47,14 +47,14 @@ int init3115(int i2cNum)
     if (i2cDev < 0)
         return 0;
 
-    write_register(MPL3115_I2C_ID, MPL3115A2_CTRL_REG1, 0);
+    i2cWrite(MPL3115_I2C_ID, MPL3115A2_CTRL_REG1, 0);
 
-    read_register(MPL3115_I2C_ID, MPL_3115_WHO_AM_I_REG, &data);
+    i2cRead(MPL3115_I2C_ID, MPL_3115_WHO_AM_I_REG, &data);
 
     if (data == MPL_3115_WHO_AM_I)
     {
-    	read_register(MPL3115_I2C_ID, MPL3115A2_CTRL_REG1, &data);
-        write_register(MPL3115_I2C_ID, MPL3115A2_CTRL_REG1, ACTIVE_MASK);
+    	i2cRead(MPL3115_I2C_ID, MPL3115A2_CTRL_REG1, &data);
+        i2cWrite(MPL3115_I2C_ID, MPL3115A2_CTRL_REG1, ACTIVE_MASK);
         return 1;
     }
     return 0;
@@ -65,10 +65,10 @@ uint16_t mpl3115ReadTemp()
 	unsigned char data = 0;
     uint16_t val = 0;
 
-	read_register(MPL3115_I2C_ID,MPL3115_TEMP_MSB_REG,&data);
+	i2cRead(MPL3115_I2C_ID,MPL3115_TEMP_MSB_REG,&data);
 	val = data;
 	val <<= 8;
-	read_register(MPL3115_I2C_ID,MPL3115_TEMP_LSB_REG,&data);
+	i2cRead(MPL3115_I2C_ID,MPL3115_TEMP_LSB_REG,&data);
 	val += data;
 
 	return val >> 8 & 0xff;

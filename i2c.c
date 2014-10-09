@@ -50,7 +50,7 @@ void i2cCleanUp(int i2cDev)
     close(i2cDev);
 }
 
-int write_register(unsigned char address, unsigned char reg, unsigned char data)
+int i2cWrite(unsigned char address, unsigned char reg, unsigned char data)
 {
 
     unsigned char output_buffer[2];
@@ -74,7 +74,7 @@ int write_register(unsigned char address, unsigned char reg, unsigned char data)
     return 0;
 }
 
-int read_register(unsigned char address, unsigned char reg, unsigned char *data)
+int i2cRead(unsigned char address, unsigned char reg, unsigned char *data)
 {
     unsigned char input_buffer, output_buffer;
     struct i2c_rdwr_ioctl_data packets;

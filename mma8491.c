@@ -68,7 +68,7 @@ uint8_t mma8491ReadRaw(uint8_t *data)
     do
     {
         //printf("Calling 8491 status register\n");
-        read_register(MMA8491_I2C_ID, MMA8491Q_STATUS, &status);
+        i2cRead(MMA8491_I2C_ID, MMA8491Q_STATUS, &status);
         //sleep(1);
     }
     while (((status & ZYXDR_BIT) != ZYXDR_BIT) || (status > 0x0f));
@@ -77,7 +77,7 @@ uint8_t mma8491ReadRaw(uint8_t *data)
     int ii;
     for (ii = 0; ii < 6; ii++)
     {
-        read_register(MMA8491_I2C_ID, MMA8491Q_OUT_X_MSB + ii, &data[ii]);
+        i2cRead(MMA8491_I2C_ID, MMA8491Q_OUT_X_MSB + ii, &data[ii]);
         //printf("Reading register 0x%x + %d\n",MMA8491Q_OUT_X_MSB,ii);
     }
     mma8491Disable();

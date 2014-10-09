@@ -60,13 +60,13 @@ int init3110(int i2cNum)
     if (i2cDev < 0)
         return 0;
 
-    write_register(MAG3110_I2C_ID, CTRL_REG_1, 0);
+    i2cWrite(MAG3110_I2C_ID, CTRL_REG_1, 0);
 
-    read_register(MAG3110_I2C_ID, WHO_AM_I_REG, &data);
+    i2cRead(MAG3110_I2C_ID, WHO_AM_I_REG, &data);
 
     if (data == WHO_AM_I)
     {
-        write_register(MAG3110_I2C_ID, CTRL_REG_2, 0x80);
+        i2cWrite(MAG3110_I2C_ID, CTRL_REG_2, 0x80);
         return 1;
     }
     return 0;
@@ -92,20 +92,20 @@ int16_t MAG3110_ReadRawData(unsigned char msbReg, unsigned char lsbReg, unsigned
     unsigned char data = 0;
     int16_t val = 0;
 
-    read_register(MAG3110_I2C_ID, msbReg, &data);
-    write_register(MAG3110_I2C_ID, CTRL_REG_2, 0x80);
-    write_register(MAG3110_I2C_ID, CTRL_REG_1, 0x02);
+    i2cRead(MAG3110_I2C_ID, msbReg, &data);
+    i2cWrite(MAG3110_I2C_ID, CTRL_REG_2, 0x80);
+    i2cWrite(MAG3110_I2C_ID, CTRL_REG_1, 0x02);
 
     do
     {
-        read_register(MAG3110_I2C_ID, STATUS_REG, &data);
+        i2cRead(MAG3110_I2C_ID, STATUS_REG, &data);
     }
     while ((data & statusFlag) != statusFlag);
 
-    read_register(MAG3110_I2C_ID, msbReg, &data);
+    i2cRead(MAG3110_I2C_ID, msbReg, &data);
     val = data;
     val <<= 8;
-    read_register(MAG3110_I2C_ID, lsbReg, &data);
+    i2cRead(MAG3110_I2C_ID, lsbReg, &data);
     val += data;
 
     return val;
@@ -116,12 +116,12 @@ uint8_t mag3110ReadRaw(uint8_t *data)
     unsigned char status = 0;
     // Wait til data is ready
 
-    write_register(MAG3110_I2C_ID, CTRL_REG_2, 0x80);
-    write_register(MAG3110_I2C_ID, CTRL_REG_1, 0x02);
+    i2cWrite(MAG3110_I2C_ID, CTRL_REG_2, 0x80);
+    i2cWrite(MAG3110_I2C_ID, CTRL_REG_1, 0x02);
     do
     {
         //printf("Calling 3100 status register\n");
-        read_register(MAG3110_I2C_ID, STATUS_REG, &status);
+        i2cRead(MAG3110_I2C_ID, STATUS_REG, &status);
         //sleep(1);
     }
     while (((status & ALL_DATA_RDY) != ALL_DATA_RDY));
@@ -130,7 +130,7 @@ uint8_t mag3110ReadRaw(uint8_t *data)
     int ii;
     for (ii = 0; ii < 6; ii++)
     {
-        read_register(MAG3110_I2C_ID, X_OUT_MSB + ii, &data[ii]);
+        i2cRead(MAG3110_I2C_ID, X_OUT_MSB + ii, &data[ii]);
         //printf("Reading register 0x%x + %d\n",X_OUT_MSB,ii);
     }
 
