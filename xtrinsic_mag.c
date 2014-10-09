@@ -30,6 +30,7 @@
 #include "i2c.h"
 #include "mag3110.h"
 #include "mma8491.h"
+#include "mpl3115.h"
 
 // Talks to a Freescale Xtrinsic Sensor board
 // Connected in the following manner
@@ -51,7 +52,7 @@ int main()
 
     signal(SIGINT,sigHandler);
 
-    if (!init3110(2) || !init8491(2, 135))
+    if (!init3110(2) || !init8491(2, 135) || !init3115(2))
     {
         printf("%s\n", "Device initialization failed.");
         exit(1);
@@ -77,6 +78,8 @@ int main()
         printf("8491 X Val Read = %d\n", mmaData.x);
         printf("8491 Y Val Read = %d\n", mmaData.y);
         printf("8491 Z Val Read = %d\n", mmaData.z);
+
+        printf("3115 Temp Read = %d\n", mpl3115ReadTemp());
 
         sleep(1);
     }
