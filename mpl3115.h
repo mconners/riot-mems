@@ -22,3 +22,4 @@
 int init3115(int i2cNum);
 void mpl3115CleanUp();
 uint16_t mpl3115ReadTemp();
+uint16_t mpl3115ReadTempF();

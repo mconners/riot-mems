@@ -80,6 +80,7 @@ int main()
         printf("8491 Z Val Read = %d\n", mmaData.z);
 
         printf("3115 Temp Read = %d\n", mpl3115ReadTemp());
+        printf("3115 Temp Read F = %d\n", mpl3115ReadTempF());
 
         sleep(1);
     }

@@ -71,7 +71,12 @@ uint16_t mpl3115ReadTemp()
 	read_register(MPL3115_I2C_ID,MPL3115_TEMP_LSB_REG,&data);
 	val += data;
 
-	return val;
+	return val >> 8 & 0xff;
+}
+
+uint16_t mpl3115ReadTempF()
+{
+	return mpl3115ReadTemp() * 9 / 5 + 32;
 }
 
 void mpl3115CleanUp()
